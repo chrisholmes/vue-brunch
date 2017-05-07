@@ -42,6 +42,12 @@ class VueBrunch {
                     reject(error);
                 }
 
+                if(this.config.globalizeComponents) {
+                  result += '\nvar _vue = require("vue")\n'
+                  let fileName = file.path.split('/').pop().replace(/\.vue/, '')
+                  result += '_vue.component("' + fileName + '", __vue__options__)\n'
+                }
+
                 resolve(result);
             });
         });
